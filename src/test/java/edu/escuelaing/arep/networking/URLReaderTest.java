@@ -1,17 +1,17 @@
 package edu.escuelaing.arep.networking;
 
-import edu.escuelaing.arep.networking.URLReader;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URL;
 import org.junit.Test;
 
 /**
- * Unit test for simple App.
+ * Unit test for URLReader.
  */
 public class URLReaderTest {
 
     @Test
-    public void deberiaDarLas8Solicitudes() throws MalformedURLException{
+    public void deberiaDarLas8SolicitudesEjercicio1() throws MalformedURLException{
         URLReader net = new URLReader();
         System.out.println(net.getProtocol() + "  Este es el protocolo");
         System.out.println(net.getAuthority() + "  Este es el Autority");
@@ -24,16 +24,10 @@ public class URLReaderTest {
     }
     
     @Test
-    public void deberiaLeerDatosDeInternet() throws MalformedURLException, IOException{
+    public void deberiaLeerDatosDeInternetEjercicio2() throws MalformedURLException, IOException{
         URLReader net = new URLReader();
-        net.leerDatosDeInternet();
+        URL google = new URL("http://www.google.com/");
+        net.leerDatosDeInternet(google);
     }
-    
-    //@Test
-    public void deberiaPedirLaUrl() throws MalformedURLException{
-        URLReader net = new URLReader();
-        net.leerUrl();
-    }
-    
     
 }
