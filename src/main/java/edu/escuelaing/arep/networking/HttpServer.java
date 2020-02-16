@@ -39,10 +39,15 @@ public class HttpServer {
             while ((inputLine = in.readLine()) != null) {
                 if (inputLine.contains("GET")) {
                     String[] listaURL = inputLine.split("/");
-                    String[] nueva = listaURL[1].split(" ");
-                    if (nueva[0].contains(".jpg")) {
-                        imagen("/src/main/resources/img/" + nueva[0], clientSocket.getOutputStream(), out);
-                    }
+                    String[] get = listaURL[1].split(" ");
+                    if (get[0].contains(".jpg")) {
+                        img("/src/main/resources/img/" + get[0], clientSocket.getOutputStream());
+                    }else if(get[0].contains(".html")) {
+                	html("/src/main/resources/hmtl/"+get[0],clientSocket.getOutputStream());
+                    }else if(get[0].contains(".js")) {
+                	js("/src/main/resources/js/"+get[0],clientSocket.getOutputStream());	
+                }                   
+
                 }
                 if (!in.ready()) {
                     break;
@@ -62,7 +67,7 @@ public class HttpServer {
         return 4567;
     }
 
-    private static void imagen(String element, OutputStream clientOutput, PrintWriter out) throws IOException {
+    private static void img(String element, OutputStream clientOutput) throws IOException {
         try {
             BufferedImage image = ImageIO.read(new File(System.getProperty("user.dir") + element));
             ByteArrayOutputStream ArrBytes = new ByteArrayOutputStream();
@@ -76,4 +81,36 @@ public class HttpServer {
 
         }
     }
+    
+    private static void html(String element,OutputStream outputStream) throws IOException {
+        try {
+            BufferedReader read = new BufferedReader(new FileReader(System.getProperty("user.dir")+element));
+            String cont = "";
+            String line;
+            while ((line = read.readLine()) != null){
+                cont = cont + line;  
+            }
+            outputStream.write(("HTTP/1.1 404 Not Found \r\n"
+                    + "Content-Type: text/html; charset=\"utf-8\" \r\n"
+                    + "\r\n"
+                    + cont).getBytes());
+        } catch (IOException e) {   
+        }
+    } 
+    
+    private static void js(String element,OutputStream outputStream) throws IOException {
+        try {
+            BufferedReader read = new BufferedReader(new FileReader(System.getProperty("user.dir")+element));
+            String cont = "";
+            String line;
+            while ((line = read.readLine()) != null){
+                cont = cont + line;  
+            }
+            outputStream.write(("HTTP/1.1 404 Not Found \r\n"
+                    + "Content-Type: text/html; charset=\"utf-8\" \r\n"
+                    + "\r\n"
+                    + cont).getBytes());
+        } catch (IOException e) {   
+        }
+    } 
 }
