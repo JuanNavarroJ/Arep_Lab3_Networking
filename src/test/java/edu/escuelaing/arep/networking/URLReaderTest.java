@@ -26,7 +26,7 @@ public class URLReaderTest {
     @Test
     public void deberiaLeerDatosDeInternetEjercicio2() throws MalformedURLException, IOException{
         URLReader net = new URLReader();
-        URL google = new URL("http://www.google.com/");
+        URL google = new URL("http://www.facebook.com/");
         net.leerDatosDeInternet(google);
     }
     
