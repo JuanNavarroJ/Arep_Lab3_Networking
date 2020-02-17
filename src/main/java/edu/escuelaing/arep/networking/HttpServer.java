@@ -46,7 +46,7 @@ public class HttpServer {
                 	html("/src/main/resources/hmtl/"+get[0],clientSocket.getOutputStream());
                     }else if(get[0].contains(".js")) {
                 	js("/src/main/resources/js/"+get[0],clientSocket.getOutputStream());	
-                }                   
+                    }                   
 
                 }
                 if (!in.ready()) {
